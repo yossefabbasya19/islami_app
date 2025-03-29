@@ -32,7 +32,6 @@ class _IslamiAppState extends State<IslamiApp> {
   Widget build(BuildContext context) {
     return MaterialApp(
       themeMode: ThemeMode.dark,
-      debugShowCheckedModeBanner: false,
       darkTheme: MyThemes.dartThemes,
       routes: MyRouter.routes,
       initialRoute: MyRouter.splash,
