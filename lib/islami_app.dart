@@ -34,6 +34,7 @@ class _IslamiAppState extends State<IslamiApp> {
       themeMode: ThemeMode.dark,
       darkTheme: MyThemes.dartThemes,
       routes: MyRouter.routes,
+      debugShowCheckedModeBanner: false,
       initialRoute: MyRouter.splash,
      /* home: Scaffold(
         body: SafeArea(
