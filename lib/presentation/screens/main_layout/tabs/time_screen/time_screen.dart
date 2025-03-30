@@ -7,6 +7,7 @@ class Time extends StatelessWidget{
       width: double.infinity,
       height: 100,
       color: Colors.tealAccent,
+      child: Text("data"),
     ),);
   }
 }
