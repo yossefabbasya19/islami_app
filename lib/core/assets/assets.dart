@@ -13,4 +13,10 @@ class Assets{
   static const String surahNumber = "$base/sura_number.png";
   static const String backgroundHadith = "$base/Background_hadith.png";
   static const String hadithCardBackground = "$base/hadith_card_background.png";
+  static const String onboarding1 = "$base/welcome.png";
+  static const String onboarding2 = "$base/kabba.png";
+  static const String onboarding3 = "$base/reading.png";
+  static const String onboarding4 = "$base/bearish.png";
+  static const String onboarding5 = "$base/radio.png";
+  static const String timeScreenBg = "$base/time_screen_bg.png";
 }

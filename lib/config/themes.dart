@@ -15,5 +15,9 @@ abstract class MyThemes {
       unselectedItemColor: ColorsManager.black,
     ),
     scaffoldBackgroundColor: ColorsManager.black,
+    textTheme: TextTheme(
+      labelSmall: TextStyle(color: ColorsManager.gold,fontSize: 17,fontWeight: FontWeight.w700),
+      titleMedium: TextStyle(color: ColorsManager.gold,fontSize: 20,fontWeight: FontWeight.w700,)
+    )
   );
 }

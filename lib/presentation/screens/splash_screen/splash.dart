@@ -13,7 +13,7 @@ class _SplashState extends State<Splash> {
   void didChangeDependencies() {
     super.didChangeDependencies();
     Future.delayed(Duration(seconds: 2),() {
-      Navigator.pushReplacementNamed(context,MyRouter.home);
+      Navigator.pushReplacementNamed(context,MyRouter.onBoarding);
     },);
   }
   @override
