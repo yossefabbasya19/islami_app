@@ -1,125 +1,105 @@
 import 'package:flutter/material.dart';
+import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:islami_app/core/assets/assets.dart';
 import 'package:islami_app/core/colors_maneger/colors_manegar.dart';
 import 'package:islami_app/core/constant/constant.dart';
+import 'package:islami_app/core/share_preferance_handling/share_preferance_handling.dart';
+import 'package:islami_app/cubit/most_recent_cubit.dart';
+import 'package:islami_app/cubit/most_recent_state.dart';
 import 'package:islami_app/presentation/screens/main_layout/tabs/quran_screen/widgets/most_recently_card.dart';
 import 'package:islami_app/presentation/screens/main_layout/tabs/quran_screen/widgets/sura_list_widget.dart';
 
 class Quran extends StatefulWidget {
   @override
-  State<Quran> createState() => _QuranState();
+  State<Quran> createState() => QuranState();
 }
 
-class _QuranState extends State<Quran> {
+class QuranState extends State<Quran> {
   TextEditingController myController = TextEditingController();
   List<SurahDataModel> filterSuraList = [];
-  List<SurahDataModel> mostRecently = [
-    SurahDataModel(suraNameAr: "", suraNameEg: "", ayaNumber: ""),
-    SurahDataModel(suraNameAr: "", suraNameEg: "", ayaNumber: ""),
-    SurahDataModel(suraNameAr: "", suraNameEg: "", ayaNumber: ""),
-    SurahDataModel(suraNameAr: "", suraNameEg: "", ayaNumber: ""),
-    SurahDataModel(suraNameAr: "", suraNameEg: "", ayaNumber: ""),
-    SurahDataModel(suraNameAr: "", suraNameEg: "", ayaNumber: ""),
-  ];
-
-  int indexOfMostRecently = 0;
-  bool checkItemInList(SurahDataModel surahDataModel){
-    return mostRecently.any((element) => element==surahDataModel,);
-  }
-  void addToMostRevently(SurahDataModel surahDataModel) {
-    if (indexOfMostRecently >= 6) {
-      indexOfMostRecently = 0;
-      if(checkItemInList(surahDataModel))return;
-      mostRecently[indexOfMostRecently] = surahDataModel;
-      indexOfMostRecently++;
-    } else {
-      if(checkItemInList(surahDataModel))return;
-      mostRecently[indexOfMostRecently] = surahDataModel;
-      indexOfMostRecently++;
-    }
-    setState(() {});
-  }
 
   @override
+  @override
   Widget build(BuildContext context) {
-    return Container(
-      decoration: BoxDecoration(
-        image: DecorationImage(
-          fit: BoxFit.fill,
-          image: AssetImage(Assets.quranScreenBackground),
+    return BlocProvider(
+      create: (context) => MostRecentCubit(),
+      child: Container(
+        decoration: BoxDecoration(
+          image: DecorationImage(
+            fit: BoxFit.fill,
+            image: AssetImage(Assets.quranScreenBackground),
+          ),
         ),
-      ),
-      child: Padding(
-        padding: const EdgeInsets.symmetric(horizontal: 15.0),
-        child: CustomScrollView(
-          slivers: [
-            SliverToBoxAdapter(
-              child: Image(image: AssetImage(Assets.quranScreenLogo)),
-            ),
-            SliverToBoxAdapter(child: buildTextField()),
-            SliverToBoxAdapter(child: SizedBox(height: 20)),
-            SliverToBoxAdapter(
-              child: Text(
-                "most Recently",
-                style: TextStyle(
-                  color: ColorsManager.white,
-                  fontSize: 20,
-                  fontWeight: FontWeight.w600,
-                ),
+        child: Padding(
+          padding: const EdgeInsets.symmetric(horizontal: 15.0),
+          child: CustomScrollView(
+            slivers: [
+              SliverToBoxAdapter(
+                child: Image(image: AssetImage(Assets.quranScreenLogo)),
               ),
-            ),
-            SliverToBoxAdapter(child: SizedBox(height: 10)),
-            SliverToBoxAdapter(
-              child: SizedBox(
-                width: double.infinity,
-                height: 150,
-                child: ListView.builder(
-                  itemCount: mostRecently.length,
-                  scrollDirection: Axis.horizontal,
-                  itemBuilder: (context, index) {
-                    return MostRecentlyCard(mostRecently: mostRecently[index]);
-                  },
-                ),
+              SliverToBoxAdapter(child: buildTextField()),
+              SliverToBoxAdapter(child: SizedBox(height: 20)),
+              BlocBuilder<MostRecentCubit, MostRecentState>(
+                builder: (context, state) {
+                  BlocProvider.of<MostRecentCubit>(context).getData();
+                  List<int> date =
+                      BlocProvider.of<MostRecentCubit>(context).mostRecent;
+                  if (state is NotEmptyMostRecentState) {
+                    return date.isEmpty
+                        ? SliverToBoxAdapter(child: SizedBox())
+                        : MostRecentlyCard(mostRecently: state.mostRecntly);
+                  } else {
+                    return SliverToBoxAdapter(child: SizedBox());
+                  }
+                },
               ),
-            ),
-            SliverToBoxAdapter(child: SizedBox(height: 10)),
-            SliverToBoxAdapter(
-              child: Text(
-                "Suras List",
-                style: TextStyle(
-                  color: ColorsManager.white,
-                  fontSize: 20,
-                  fontWeight: FontWeight.w600,
-                ),
-              ),
-            ),
-            SliverList.separated(
-              itemBuilder:
-                  (context, index) => SuraListWidget(
-                    addToMostRevently: addToMostRevently,
-                    surahDataModel: filterSuraList.isEmpty?surahList[index]:filterSuraList[index],
-                    index: index + 1,
+              SliverToBoxAdapter(child: SizedBox(height: 10)),
+              SliverToBoxAdapter(
+                child: Text(
+                  "Suras List",
+                  style: TextStyle(
+                    color: ColorsManager.white,
+                    fontSize: 20,
+                    fontWeight: FontWeight.w600,
                   ),
-              separatorBuilder: (context, index) => Divider(),
-              itemCount: filterSuraList.isEmpty?surahList.length:filterSuraList.length,
-            ),
-          ],
+                ),
+              ),
+              SliverList.separated(
+                itemBuilder:
+                    (context, index) => SuraListWidget(
+                      surahDataModel:
+                          filterSuraList.isEmpty
+                              ? surahList[index]
+                              : filterSuraList[index],
+
+                    ),
+                separatorBuilder: (context, index) => Divider(),
+                itemCount:
+                    filterSuraList.isEmpty
+                        ? surahList.length
+                        : filterSuraList.length,
+              ),
+            ],
+          ),
         ),
+        //color: Colors.pinkAccent,
       ),
-      //color: Colors.pinkAccent,
     );
   }
-  void surahSearch(value){
-    filterSuraList = surahList.where((element) {
-      return element.suraNameAr.contains(value);
-    }).toList();
+
+  void surahSearch(value) {
+    filterSuraList =
+        surahList.where((element) {
+          return element.suraNameAr.contains(value);
+        }).toList();
     setState(() {});
   }
+
   SizedBox buildTextField() {
     return SizedBox(
       height: 50,
       child: TextField(
-        onChanged:surahSearch,
+        onChanged: surahSearch,
         style: TextStyle(
           fontSize: 18,
           fontWeight: FontWeight.w500,

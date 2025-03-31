@@ -38,6 +38,8 @@ dependencies:
   audioplayers: ^6.4.0
   dio: ^5.8.0+1
   introduction_screen: ^3.1.17
+  shared_preferences: ^2.5.3
+  flutter_bloc: ^9.1.0
 
 dev_dependencies:
   flutter_test:

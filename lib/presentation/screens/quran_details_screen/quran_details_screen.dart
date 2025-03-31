@@ -21,9 +21,10 @@ class _QuranDetailsScreenState extends State<QuranDetailsScreen> {
     loadFileText();
   }
 
+
   void loadFileText() async {
     String fileContent = await rootBundle.loadString(
-      "assets/files/Suras/${argumentFromSuraList.index}.txt",
+      "assets/files/Suras/${argumentFromSuraList.surahDataModel.index}.txt",
     );
     List slipingList = fileContent.trim().split("\n");
     for (int i = 0; i < slipingList.length; i++) {
