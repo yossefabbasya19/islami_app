@@ -1,32 +1,33 @@
 import 'package:flutter/material.dart';
+import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:islami_app/core/assets/assets.dart';
 import 'package:islami_app/core/colors_maneger/colors_manegar.dart';
 import 'package:islami_app/core/constant/constant.dart';
 import 'package:islami_app/core/router/my_router.dart';
+import 'package:islami_app/core/share_preferance_handling/share_preferance_handling.dart';
+import 'package:islami_app/cubit/most_recent_cubit.dart';
+import 'package:islami_app/presentation/screens/main_layout/tabs/quran_screen/quran_screen.dart';
+import 'package:islami_app/presentation/screens/main_layout/tabs/quran_screen/widgets/most_recently_card.dart';
 
 class SuraListWidget extends StatelessWidget {
   SurahDataModel surahDataModel;
-  void Function(SurahDataModel) addToMostRevently;
-  int index;
 
   SuraListWidget({
     super.key,
-    required this.addToMostRevently,
     required this.surahDataModel,
-    required this.index,
   });
 
   @override
   Widget build(BuildContext context) {
     return InkWell(
-      onTap: () {
-        addToMostRevently(surahDataModel);
+      onTap: () async{
+        BlocProvider.of<MostRecentCubit>(context).addMostRecent(surahDataModel.index-1);
+        //await SharePreferencesHandling.addMostRecent((index -1).toString());
         Navigator.pushNamed(
           context,
           MyRouter.quranDetails,
           arguments: SurahDataModelArgument(
             surahDataModel: surahDataModel,
-            index: index,
           ),
         );
       },
@@ -37,7 +38,7 @@ class SuraListWidget extends StatelessWidget {
             children: [
               Image(image: AssetImage(Assets.surahNumber)),
               Text(
-                "$index",
+                "${surahDataModel.index}",
                 style: TextStyle(
                   color: ColorsManager.white,
                   fontSize: 24,
