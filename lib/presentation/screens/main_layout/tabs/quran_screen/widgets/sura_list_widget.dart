@@ -26,9 +26,8 @@ class SuraListWidget extends StatelessWidget {
         Navigator.pushNamed(
           context,
           MyRouter.quranDetails,
-          arguments: SurahDataModelArgument(
-            surahDataModel: surahDataModel,
-          ),
+          arguments:
+             surahDataModel,
         );
       },
       child: Row(

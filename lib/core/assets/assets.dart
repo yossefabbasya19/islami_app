@@ -19,4 +19,8 @@ class Assets{
   static const String onboarding4 = "$base/bearish.png";
   static const String onboarding5 = "$base/radio.png";
   static const String timeScreenBg = "$base/time_screen_bg.png";
+  static const String eveningAzkar = "$base/evening_azkar.png";
+  static const String morningAzkar = "$base/morning_azkar.png";
+  static const String sleepingAzkar = "$base/sleeping_azkar.png";
+  static const String wakingAzkar = "$base/waking_azkar.png";
 }

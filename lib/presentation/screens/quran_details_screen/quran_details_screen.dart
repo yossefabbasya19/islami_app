@@ -10,25 +10,25 @@ class QuranDetailsScreen extends StatefulWidget {
 }
 
 class _QuranDetailsScreenState extends State<QuranDetailsScreen> {
-  late SurahDataModelArgument argumentFromSuraList;
+  late SurahDataModel surahDataModel;
   String suraContent = '';
 
   @override
   void didChangeDependencies() {
     super.didChangeDependencies();
-    argumentFromSuraList =
-        ModalRoute.settingsOf(context)!.arguments as SurahDataModelArgument;
+    surahDataModel =
+        ModalRoute.settingsOf(context)!.arguments as SurahDataModel;
     loadFileText();
   }
 
-
   void loadFileText() async {
-    String fileContent = await rootBundle.loadString(
-      "assets/files/Suras/${argumentFromSuraList.surahDataModel.index}.txt",
+    print(surahDataModel.index);
+    String loadFile = await rootBundle.loadString(
+      "assets/files/Suras/${surahDataModel.index}.txt",
     );
-    List slipingList = fileContent.trim().split("\n");
-    for (int i = 0; i < slipingList.length; i++) {
-      suraContent += slipingList[i] + " [" + "${i + 1}" + '] ';
+    List<String> loadedFile = loadFile.trim().split("\n");
+    for (int i = 0; i < loadedFile.length; i++) {
+      suraContent += loadedFile[i] + "[" + "${i+1}" + ']';
     }
     setState(() {});
   }
@@ -38,7 +38,7 @@ class _QuranDetailsScreenState extends State<QuranDetailsScreen> {
     return Scaffold(
       appBar: AppBar(
         title: Text(
-          argumentFromSuraList.surahDataModel.suraNameEg,
+          surahDataModel.suraNameEg,
           style: TextStyle(
             color: ColorsManager.gold,
             fontSize: 24,
@@ -48,7 +48,10 @@ class _QuranDetailsScreenState extends State<QuranDetailsScreen> {
       ),
       body: Column(
         children: [
-          DisplayNameWithCorners(verseNameAr: argumentFromSuraList.surahDataModel.suraNameAr,colorsOfCorners: ColorsManager.gold ,),
+          DisplayNameWithCorners(
+            verseNameAr: surahDataModel.suraNameAr,
+            colorsOfCorners: ColorsManager.gold,
+          ),
           Expanded(
             child: ListView.builder(
               itemCount: 1,

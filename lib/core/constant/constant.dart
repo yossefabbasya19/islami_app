@@ -17,13 +17,7 @@ class SurahDataModel {
   });
 }
 
-class SurahDataModelArgument {
-  SurahDataModel surahDataModel;
 
-
-
-  SurahDataModelArgument({required this.surahDataModel});
-}
 
 List<SurahDataModel> surahList = [
   SurahDataModel(index: 1, suraNameAr: "الفاتحه", suraNameEg: "Al-Fatiha", ayaNumber: "7"),
