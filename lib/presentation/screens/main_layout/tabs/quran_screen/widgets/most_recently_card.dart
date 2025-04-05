@@ -4,7 +4,7 @@ import 'package:islami_app/core/assets/assets.dart';
 import 'package:islami_app/core/colors_maneger/colors_manegar.dart';
 import 'package:islami_app/core/constant/constant.dart';
 import 'package:islami_app/core/share_preferance_handling/share_preferance_handling.dart';
-import 'package:islami_app/cubit/most_recent_cubit.dart';
+import 'package:islami_app/cubit/most_recent_cubit/most_recent_cubit.dart';
 
 class MostRecentlyCard extends StatefulWidget {
   List <int >mostRecently;

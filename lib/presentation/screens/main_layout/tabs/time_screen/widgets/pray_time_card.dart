@@ -38,7 +38,6 @@ class _PrayTimeCardState extends State<PrayTimeCard> {
       praysName.add(prayName);
     }
 
-
     nextPrayResult = nextPray(prayTimeDm!.timing);
     setState(() {});
   }
@@ -79,12 +78,13 @@ class _PrayTimeCardState extends State<PrayTimeCard> {
     if (nextPray == null) nextPrayTime = x.values.toList()[0];
     return nextPrayTime;
   }
+
   String? nextPrayResult = '';
+
   @override
   void initState() {
     super.initState();
     getData();
-
   }
 
   @override
