@@ -25,7 +25,6 @@ class Assets{
   static const String wakingAzkar = "$base/waking_azkar.png";
   static const String soundPause = "$base/sound_pause.png";
   static const String soundPlay = "$base/radio_card_play.png";
-  static const String soundPause = "$base/radio_card_pause.png";
   static const String sebha = "$base/sebha.png";
   static const String sebhaBG = "$base/sebha_Background.png";
 }
