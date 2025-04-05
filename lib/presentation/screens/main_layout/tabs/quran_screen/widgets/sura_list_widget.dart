@@ -5,7 +5,7 @@ import 'package:islami_app/core/colors_maneger/colors_manegar.dart';
 import 'package:islami_app/core/constant/constant.dart';
 import 'package:islami_app/core/router/my_router.dart';
 import 'package:islami_app/core/share_preferance_handling/share_preferance_handling.dart';
-import 'package:islami_app/cubit/most_recent_cubit.dart';
+import 'package:islami_app/cubit/most_recent_cubit/most_recent_cubit.dart';
 import 'package:islami_app/presentation/screens/main_layout/tabs/quran_screen/quran_screen.dart';
 import 'package:islami_app/presentation/screens/main_layout/tabs/quran_screen/widgets/most_recently_card.dart';
 

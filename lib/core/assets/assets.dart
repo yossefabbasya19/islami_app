@@ -23,4 +23,5 @@ class Assets{
   static const String morningAzkar = "$base/morning_azkar.png";
   static const String sleepingAzkar = "$base/sleeping_azkar.png";
   static const String wakingAzkar = "$base/waking_azkar.png";
+  static const String soundPause = "$base/sound_pause.png";
 }

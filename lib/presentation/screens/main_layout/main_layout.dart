@@ -26,6 +26,7 @@ class _HomeState extends State<Home> {
       bottomNavigationBar: buildBottomNavigationBar(),
     );
   }
+
   Widget isSelectedTab(int selected, String path) {
     if (selected == selectedTab) {
       return Container(
