@@ -45,7 +45,6 @@ class _PlaySoundRecitertsButtonState extends State<PlaySoundRecitertsButton> {
       indexOfSuraList = widget.recitersDm.surahList[counter];
       url = urlFormated();
       widget.audioPlayer.play(UrlSource(url));
-      print(url);
 
     });
   }
